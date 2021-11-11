@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache" />
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
     <title>Blessed UPVC Windows and Doors</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         .img-size {
-            height: 100px;
-        }
-
-        #tbody_list tr td button{
-            visibility: hidden;
-        }
-
-        #tbody_list tr:hover td button{
-            visibility: visible;
+            height: 80px;
         }
     </style>
 </head>
@@ -33,12 +30,12 @@
         
         <!-- Visible only in print -->
         <h5 class="d-none d-print-block">Blessed UPVC Windows and Doors</h5>
-        <div class="d-none d-print-block"><b>Address:</b> Block 3 Lot 30 Phase 4 Tanza Cavite.</div>
-        <div class="d-none d-print-block"><b>Contact No.:</b> 09337581247</div>
-        <div class="d-none d-print-block"><b>Email</b> sample@gmail.com</div>
+        <div class="d-none d-print-block"><b>Address:</b> Section 12, Block 12 Phase 1 Lot 6, Pabahay 2000, Brgy. Bagtas Tanza Cavite.</div>
+        <div class="d-none d-print-block"><b>Contact No.:</b> 0963-222-6053</div>
+        <div class="d-none d-print-block"><b>Email</b> serabladanilo09@gmail.com</div>
 
-        <button class="btn btn-primary d-print-none" data-target="#modalSettings" data-toggle="modal">Settings</button>
-        <button class="btn btn-primary d-print-none" onclick="window.print()">Print</button>
+        <button class="btn btn-secondary d-print-none" data-target="#modalSettings" data-toggle="modal"><i class="fas fa-cog"></i> <span class="ml-1">Settings</span></button>
+        <button class="btn btn-primary ml-1 d-print-none" onclick="windows.print()"><i class="fas fa-print"></i> <span class="ml-1">Print</span></button>
 
         <hr class="d-print-none"/>
 
@@ -47,9 +44,11 @@
                 <div class="form-row">
                     <div class="col-lg-4 col-md-12 col-sm-12 my-3">
                         <input type="number" class="form-control" id="add_height" placeholder="Height">
+                        <small class="text-muted">In centimeter</small>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 my-3">
                         <input type="number" class="form-control" id="add_width" placeholder="Width">
+                        <small class="text-muted">In centimeter</small>
                     </div>
                     
                     <div class="col-lg-4 col-md-12 col-sm-12 my-3">
@@ -66,21 +65,55 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 my-3">
                         <input type="number" class="form-control" id="add_quantity" placeholder="Quantity">
                     </div>
-                    <div class="col-lg-2 col-md-12 col-sm-12 my-3">
-                        <button class="btn btn-success btn-block" onclick="addWindow()">Add Window</button>
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 my-3">
+                        <select class="form-control" id="add_color">
+                            <option value="White">White (Standard)</option>
+                            <option value="Gray">Gray</option>
+                            <option value="Brown">Brown</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 my-3">
+                        <select class="form-control" id="add_floor">
+                            <option value="1F">1F</option>
+                            <option value="2F">2F</option>
+                            <option value="3f">3F</option>
+                            <option value="4F">4F</option>
+                            <option value="5F">5F</option>
+                            <option value="Penthhouse">Penthouse</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 my-3">
+                        <input type="text" class="form-control" id="add_location" placeholder="Location">
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 my-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="" id="add_laminated" value="false">
+                                Laminated
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex align-items-center justify-content-start w-100 my-3">
+                        <button class="btn btn-success mr-2" onclick="windows.add()"><i class="fas fa-plus"></i> <span class="ml-1">Add Window</span></button>
+                        <button class="btn btn-light">Reset</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h5 class="mt-3">Window Summary Computation</h5>
+        <h5 class="mt-4">Window Summary Computation</h5>
         <table class="table table-sm table-bordered">
             <thead class="bg-primary text-white">
                 <tr>
                     <th scope="col">Qty</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Height</th>
-                    <th scope="col">Width</th>
+                    <th scope="col">Height (cm)</th>
+                    <th scope="col">Width (cm)</th>
                     <th class="text-right" scope="col">Price</th>
                 </tr>
             </thead>
@@ -106,6 +139,10 @@
                             <div class="form-group">
                                 <label for="">Price per sqft</label>
                                 <input type="number" class="form-control" id="price_sqft" aria-describedby="helpId" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Discount (%)</label>
+                                <input type="number" class="form-control" id="discount" aria-describedby="helpId" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -135,6 +172,7 @@
                             <div class="form-group">
                                 <label for="">Height</label>
                                 <input type="number" class="form-control" id="edit_height" placeholder="Height">
+                                <input type="hidden" class="form-control" id="edit_key">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -164,11 +202,52 @@
                                 <input type="number" class="form-control" id="edit_quantity" placeholder="Quantity">
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Color</label>
+                                <select class="form-control" id="edit_color">
+                                    <option value="White">White (Standard)</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Brown">Brown</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Floor</label>
+                                <select class="form-control" id="edit_floor">
+                                    <option value="1F">1F</option>
+                                    <option value="2F">2F</option>
+                                    <option value="3f">3F</option>
+                                    <option value="4F">4F</option>
+                                    <option value="5F">5F</option>
+                                    <option value="Penthhouse">Penthouse</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Location</label>
+                                <input type="text" class="form-control" id="edit_location" placeholder="Location">
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="" id="edit_laminated" value="false">
+                                    Laminated
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-primary" onclick="windows.update()">Update</button>
                 </div>
             </div>
         </div>
@@ -185,177 +264,6 @@
     <!-- Sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            
-            loadData();
-            loadSettings();
-
-            $("#modalSettings").on('shown.bs.modal',function(){
-                $('#price_sqft').val(window.localStorage.getItem('price_sqft'));
-            })
-        })
-
-        function loadSettings() {
-            $.ajax({
-                url: 'data/settings.json',
-                dataType: 'json',
-                success: function(data) {
-                    window.localStorage.setItem('price_sqft', data.price_sqft);
-                },
-                statusCode: {
-                    404: function() {
-                        alert('There was a problem with the server.  Try again soon!');
-                    }
-                }
-            });
-        }
-
-        function addWindow() {
-            var height = parseFloat($("#add_height").val());
-            var width = parseFloat($("#add_width").val());
-            var date = new Date();
-            var stamp_time = date.getTime();
-            var stamp_milli = date.getMilliseconds();
-
-            if( 
-                $("#add_height").val() == '' || 
-                $("#add_width").val() == '' || 
-                $("#add_width").val() <= 0 || 
-                $("#add_height").val() <= 0 
-            ){
-                return false;
-            }
-            
-            var data = {
-                "id": stamp_time + stamp_milli,
-                "height": height,
-                "width": width,
-                "type": $("#add_type").val(),
-                "quantity": 1,
-                "amount": 5000
-            }
-
-            var newData = JSON.stringify(data);
-            jQuery.post('file.php', {
-                newData: newData,
-                method: 'addWindow'
-            }, function(response){
-                clearField();
-                loadData();
-            })
-        }
-
-        function clearField() {
-            $("#add_height").val("");
-            $("#add_width").val("");
-        }
-
-        function saveSettings() {
-            if($("#price_sqft").val() == ''){
-                swal("Invalid","Please input SQFT","error");
-                return false;
-            }
-
-            var data = {
-                price_sqft: $("#price_sqft").val()
-            }
-
-            window.localStorage.setItem('price_sqft', data.price_sqft);
-
-            var newData = JSON.stringify(data);
-            jQuery.post('file.php', {
-                newData: newData,
-                method: 'saveSettings'
-            }, function(response){
-                $("#modalSettings").modal('hide')
-                swal("Saved!","Successfully Saved","success");
-            })
-        }
-
-        function getWindowImage(type){
-            switch(type) {
-            case "swing":
-                return '<img class="img-fluid img-size" src="images/swing.png" alt="swing">';
-                break;
-            case "sliding":
-                return '<img class="img-fluid img-size" src="images/sliding.png" alt="sliding">';
-                break;
-            case "casement":
-                return '<img class="img-fluid img-size" src="images/casement.png" alt="casement">';
-                break;
-            case "hopper":
-                return '<img class="img-fluid img-size" src="images/hopper.png" alt="hopper">';
-                break;
-            case "fixed":
-                return '<img class="img-fluid img-size" src="images/fixed.png" alt="fixed">';
-                break;
-            case "awning":
-                return '<img class="img-fluid img-size" src="images/awning.png" alt="awning">';
-                break;
-            case "double_hung":
-                return '<img class="img-fluid img-size" src="images/double_hung.png" alt="double_hung">';
-                break;
-            default:
-            return '<img class="img-fluid img-size" src="images/swing.png" alt="swing">';
-            }
-        }
-
-        function deleteWindow(id) {
-            alert(id)
-        }
-
-        function editWindow(id, height, width, quantity, amount) {
-            $('#edit_height').val(height)
-            $('#edit_width').val(width)
-            $('#edit_quantity').val(quantity)
-
-
-            $('#modalEdit').modal('show')
-            console.log(width)
-        }
-
-        function loadData() {
-            $('#tbody_list').html('')
-
-            $.ajax({
-                url: 'data/data.json',
-                dataType: 'json',
-                success: function(data) {
-                    var list = '';
-                    var btn = '';
-                    var total = [];
-                    $.each(data, function(key, val) {
-
-                        btn = '<br/><br/><button class="btn btn-sm btn-link" onclick="deleteWindow('+val.id+')">Delete</button>\
-                        <button type="button" class="btn btn-sm btn-link" onclick="editWindow('+val.id+','+val.height+','+val.width+','+val.quantity+','+val.amount+')" >Edit</button>\
-                        ';
-
-                        list += '\
-                            <tr>\
-                                <td>'+ val.quantity +'</td>\
-                                <td>'+ getWindowImage(val.type) +'</td>\
-                                <td>'+ val.height +'</td>\
-                                <td>'+ val.width +'</td>\
-                                <td class="text-right">Php. '+ val.amount +''+ btn +'</td>\
-                            </tr>\
-                        '; 
-
-                        total.push(val.amount)
-                    });
-
-                    list += '<tr><td colspan="5" class="text-right"><b>Total Amount:</b> Php. '+ total.reduce((a, b) => a + b, 0) +'</td></tr>';
-
-                    $('#tbody_list').append(list)
-
-                },
-                statusCode: {
-                    404: function() {
-                        alert('There was a problem with the server.  Try again soon!');
-                    }
-                }
-            });
-        }
-    </script>
-
+    <!-- Script App -->
+    <script src="script.js"></script>
 </html>
