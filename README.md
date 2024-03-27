@@ -1,4 +1,4 @@
-Simple window computation 
+**Simple window computation **
 
 Allow the users to canvas the price and design of a windows. 
 
